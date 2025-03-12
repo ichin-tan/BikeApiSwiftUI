@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct FavouriteView: View {
+struct favoriteLocationListView: View {
     @EnvironmentObject var dbController: DatabaseController
     @State private var showDeleteAlert = false
     @State private var favoriteToDelete: Favorites?
@@ -16,18 +16,18 @@ struct FavouriteView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(dbController.favoriteNetworks, id: \.self) { favorite in
+                ForEach(dbController.favoriteNetworks, id: \.self) { favoriteNetwork in
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(favorite.value(forKey: "city") as? String ?? "")
+                            Text(favoriteNetwork.city ?? "")
                                 .font(.headline)
-                            Text(favorite.value(forKey: "companies") as? String ?? "")
+                            Text(favoriteNetwork.companies ?? "")
                                 .font(.subheadline)
                         }
                     }
                     .swipeActions {
                         Button(role: .destructive) {
-                            favoriteToDelete = favorite
+                            favoriteToDelete = favoriteNetwork
                             showDeleteAlert = true
                         } label: {
                             Label("Delete", systemImage: "trash")
@@ -36,7 +36,7 @@ struct FavouriteView: View {
                 }
             }
             .navigationTitle("Favorites")
-            .background(Color("Background"))
+            .background(Color.white)
         }
         .onAppear {
             dbController.fetchFavorites()

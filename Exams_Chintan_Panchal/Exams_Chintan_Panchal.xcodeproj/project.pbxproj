@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		72CBEDFE2D81F643000F0E28 /* BikeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72CBEDFC2D81F643000F0E28 /* BikeModel.xcdatamodeld */; };
+		72CBEE2E2D820690000F0E28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 72CBEE2D2D820690000F0E28 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72CBEE2E2D820690000F0E28 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			);
 			name = Exams_Chintan_Panchal;
 			packageProductDependencies = (
+				72CBEE2D2D820690000F0E28 /* Alamofire */,
 			);
 			productName = Exams_Chintan_Panchal;
 			productReference = 72CBEDC52D81E735000F0E28 /* Exams_Chintan_Panchal.app */;
@@ -100,6 +103,9 @@
 			);
 			mainGroup = 72CBEDBC2D81E735000F0E28;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				72CBEE2C2D820690000F0E28 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 72CBEDC62D81E735000F0E28 /* Products */;
 			projectDirPath = "";
@@ -331,6 +337,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		72CBEE2C2D820690000F0E28 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72CBEE2D2D820690000F0E28 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72CBEE2C2D820690000F0E28 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		72CBEDFC2D81F643000F0E28 /* BikeModel.xcdatamodeld */ = {

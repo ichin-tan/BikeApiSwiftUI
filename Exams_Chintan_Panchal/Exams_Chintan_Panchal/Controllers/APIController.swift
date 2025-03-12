@@ -6,23 +6,31 @@
 //
 
 import Foundation
+import Alamofire
 
 class APIController: ObservableObject {
-    @Published var bikes: [Bike] = []
-    
-    func fetchNetworks() {
-        guard let url = URL(string: "https://api.citybik.es/v2/networks") else { return }
+    @Published var arrNetworks: [Network] = []
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
-            do {
-                let result = try JSONDecoder().decode(BikeResponse.self, from: data)
-                DispatchQueue.main.async {
-                    self.bikes = result.networks
+    func fetchBikeNetworks() {
+        let apiURL = "https://api.citybik.es/v2/networks"
+        
+        AF.request(apiURL)
+            .validate()
+            .response { res in
+                switch res.result {
+                    case .success(let responseData):
+                        do {
+                            if let responseData = responseData {
+                                let networkResponse = try JSONDecoder().decode(NetworkResponse.self, from: responseData)
+                                self.arrNetworks = networkResponse.networks
+                            }
+                        } catch {
+                            print("Error decoding products!")
+                        }
+                        
+                    case .failure(let error):
+                        print("Error fetching products! \(error.localizedDescription)")
                 }
-            } catch {
-                print("Error decoding: \(error)")
             }
-        }.resume()
     }
 }

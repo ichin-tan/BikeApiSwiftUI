@@ -22,17 +22,17 @@ class DatabaseController: ObservableObject {
         }
     }
     
-    func saveFavorite(bike: Bike) {
+    func saveFavoriteNetwork(network: Network) {
         let context = container.viewContext
-        guard !isFavorite(networkId: bike.id) else {
+        guard !isFavorite(networkId: network.id) else {
             return
         }
         
         let favorite = NSEntityDescription.insertNewObject(forEntityName: "Favorites", into: context) as! Favorites
-        favorite.id = bike.id
-        favorite.name = bike.name
-        favorite.city = bike.location.city
-        favorite.companies = bike.company?.joined(separator: ", ")
+        favorite.id = network.id
+        favorite.name = network.name
+        favorite.city = network.location.city
+        favorite.companies = network.company?.joined(separator: ", ")
 
         saveAndFetchFavorites()
     }

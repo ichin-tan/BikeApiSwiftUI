@@ -8,25 +8,10 @@
 import SwiftUI
 
 @main
-struct Exams_Chintan_PanchalApp: App {
-    @StateObject private var apiController = APIController()
-    @StateObject private var dbController = DatabaseController()
-    
+struct Exams_Chintan_PanchalApp: App {    
     var body: some Scene {
         WindowGroup {
-            TabView {
-                BikeListView(apiController: apiController)
-                    .tabItem {
-                        Label("All Locations", systemImage: "bicycle")
-                    }
-                FavouriteView()
-                    .tabItem {
-                        Label("Favorites", systemImage: "star.fill")
-                    }
-            }
-            .environmentObject(dbController)
-            .accentColor(.blue)
-            .background(Color("Background"))
+            ContentView()
         }
     }
 }

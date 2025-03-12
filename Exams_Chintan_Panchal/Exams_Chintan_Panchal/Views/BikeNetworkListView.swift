@@ -43,6 +43,7 @@ struct BikeNetworkListView: View {
                     }
                 }
                 .listStyle(.plain)
+                .searchable(text: $searchText)
             }
             .navigationTitle("Network List")
             .navigationDestination(isPresented: $goToDetailScreen) {

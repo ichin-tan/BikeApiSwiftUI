@@ -17,16 +17,15 @@ struct ContentView: View {
         TabView {
             BikeNetworkListView(apiController: apiController)
                 .tabItem {
-                    Label("All Locations", systemImage: "bicycle")
+                    Label("Cities", systemImage: "list.dash")
                 }
-            favoriteLocationListView()
+            FavoriteLocationListView()
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
         }
         .environmentObject(dbController)
         .accentColor(.blue)
-        .background(Color.white)
     }
 }
 

@@ -12,21 +12,43 @@ struct BikeNetworkDetailView: View {
     let bikeNetwork: Network
     @EnvironmentObject var dbController: DatabaseController
     @State private var showAlert = false
+    @State private var cameraPosition = MapCameraPosition.region(MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 34.01, longitude: -116.16),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    ))
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Map(coordinateRegion: .constant(MKCoordinateRegion(
-                    center: CLLocationCoordinate2D(latitude: bikeNetwork.location.latitude,
-                                                   longitude: bikeNetwork.location.longitude),
-                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))),
-                    annotationItems: [bikeNetwork]) { network in
-                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: network.location.latitude,
-                                                                 longitude: network.location.longitude))
+                Map(position: $cameraPosition) {
+                    Annotation("", coordinate: CLLocationCoordinate2D(latitude: bikeNetwork.location.latitude,longitude: bikeNetwork.location.longitude)){
+                        Button(action: {}) {
+                            VStack(spacing: 0) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color.blue.opacity(0.5))
+                                        .frame(width: 30, height: 30)
+                                    Text("📍")
+                                        .padding(5)
+                                        .font(.system(size: 20))
+                                }
+                                Text("\(bikeNetwork.location.city)")
+                                    .foregroundColor(.primary)
+                                    .font(.system(size: 10))
+                                    .fontWeight(.medium)
+                            }
+                        }
+                    }
+                }
+                .onAppear() {
+                    let region = MKCoordinateRegion(
+                        center: CLLocationCoordinate2D(latitude: bikeNetwork.location.latitude,
+                                                       longitude: bikeNetwork.location.longitude),
+                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    )
+                    cameraPosition = MapCameraPosition.region(region)
                 }
                 .frame(height: 300)
-                // Have to display city name on marker
-                
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Name: \(bikeNetwork.name)")
